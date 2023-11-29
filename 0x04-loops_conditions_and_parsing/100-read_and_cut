@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Displays the content of the file '/etc/passwd'
+# The output should include:
+#       username
+#	user id
+#	Home directory path for the user
+# Must use the while loop.
+
+filename="/etc/passwd"
+while read line;
+do
+    echo "$line" | cut -d ":" -f 1,3,6
+done < $filename
