@@ -1,0 +1,66 @@
+-------------------------------
+Three server web infrastructure
+-------------------------------
+
+PART A: Design
+--------------
+
+Image link: https://i.imgur.com/dGXmjCU.png
+
+
+PART B: Added specifics explained
+---------------------------------
+
+Feature Added to design
+-----------------------
+
+Spec 1: 2 Servers Used
+
+As the web application continues to grow, it would be getting more traffic from millions of users. This may result to the overloading of the server. Therefore, it would be a great idea to add a second server. The two servers used would now allow us to handle the client requests more effectively.
+
+Spec 2: Load Balancer (HAproxy)
+Since we are using two servers in this design, the load balancer is introduced in the design to help distribute the incoming traffic across multiple servers. Which increases efficiency, reliability and availability of your site.
+
+
+Questions related to design
+---------------------------
+Q1: What distribution algorithm your load balancer is configured with and how it works?
+
+Round robin algorithm:
+This algorithm works by creating a circular queue, where the first request is sent to the first server, the second incoming request is sent to be handled by the second server. Then this process gets repeated over and over again until all the requests are handled.
+
+Q2: Is your load-balancer enabling an Active-Active or Active-Passive setup, explain the difference between both?
+The HAproxy is using the Active-Passive setup.
+
+Difference
+----------
+In Active-Active configuration the HAproxy server spreads out the workload's traffic among multiple nodes, however in th Active-Passive configuration the HAproxy server recognizes a failed node and redirects the traffic to the next available node.
+
+
+Q3: How a database Primary-Replica (Master-Slave) cluster works?
+
+Master-Slave cluster involves the use master database server with one or more slave servers. 
+
+In this architecture the data in the primary database server gets replicated to the slave serves. When the primary server is updated this changes are also effected to the slave servers which contain a copy of the original data.
+
+The master server performs all the writing operations of the data request while the read operations are distributed across the slave servers.
+
+Thus improving the reliability of the database
+
+Q4: What is the difference between the Primary node and the Replica node in regard to the application?
+The primary node is the authoritative/source that handles the write queries while the replica node handles the read queries.
+Note: When the primary node fails the replica node becomes the primary node.   
+
+
+
+PART C: Issues related to this design
+
+Issue 1: SPOF
+The main source of SPOF is the load balancer used. Failure in any one of this could cause the whole system to fail.
+
+Issue 2: Security issues (no firewall, no HTTPS)
+The lack of a firewall leaves the network unprotected and open from intrusion outside that network.
+When HTTPs is not enabled, the client-server data excahange is not encrypted and thus susceptible to eavesdropping
+
+Issue 3: No monitoring
+When there is no monitoring it is difficult to recognize the challenges within the system as they occur. When we can't identify the challenges then it cannot be addressed at the right time.
