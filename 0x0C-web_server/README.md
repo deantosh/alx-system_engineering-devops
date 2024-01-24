@@ -1,0 +1,1 @@
+Project focusses on creating scripts that automatically performs command to configure an Ubuntu machine to fit requirements (without human intervention). 
