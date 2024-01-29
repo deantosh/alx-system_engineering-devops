@@ -1,18 +1,13 @@
 # Using 'Puppet' to make changes to configuration file
-
-# Include the stdlib module
-include stdlib
-
-# Update or Add 'PasswordAuthentication on'
-file_line { 'turn_off_password':
-  ensure => present,
+file_line { 'Turn off passwd auth':
+  ensure => 'present',
   path   => '/etc/ssh/ssh_config',
-  line   => '   PasswordAuthentication on',
+  line   => '    PasswordAuthentication no',
 }
 
-# Update or add 'private key'
-file_line { 'Declare file identity':
-  ensure => present,
+file_line { 'Declare identity file':
+  ensure => 'present',
   path   => '/etc/ssh/ssh_config',
-  line   => '   IdentityFile ~/.ssh/school',
+  line   => '    IdentityFile ~/.ssh/school',
 }
+
