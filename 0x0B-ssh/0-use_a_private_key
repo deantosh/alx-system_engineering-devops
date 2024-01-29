@@ -3,7 +3,7 @@
 
 private_key="$HOME/.ssh/school"
 username="ubuntu"
-server_ip="54.173.78.66"
+server_ip="54.173.61.92"
 
 # connect to server
 ssh -i "$private_key" "$username@$server_ip"
