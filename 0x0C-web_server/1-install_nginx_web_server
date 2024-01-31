@@ -1,18 +1,7 @@
 #!/usr/bin/env bash
-# Script that installs nginx web server and configures
-# it based on the  requirements.
-
-# update package list
+# Installs nginx server
 apt-get update
-
-# install nginx web server
-apt-get install -y nginx
-
-# configure server to listen to port: 80
+apt-get -y install nginx
 ufw allow 'Nginx HTTP'
-
-# add content  to index.html
 echo "Hello World!" > /var/www/html/index.html
-
-# start nginx
 service nginx start
