@@ -5,15 +5,12 @@
 sudo apt-get update
 sudo apt-get install -y nginx
 
-# Nginx server to listen to port 80
-ufw allow "Nginx HTTP"
-
 # redirect to another page
-replace_string="server_name _;\n\trewrite ^\/redirect_me cleancodes.tech permanent;"
+replace_string="server_name _;\n\trewrite ^\/redirect_me http:\/\/cleancodes.tech permanent;"
 sudo sed -i "s/server_name _;/$replace_string/" /etc/nginx/sites-enabled/default
 
 # Add 'Hello World!' text to index file
-echo "Hello World!" >> /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.html
 
 # restart Nginx server
-sudo service nginx restart
+sudo service nginx start
