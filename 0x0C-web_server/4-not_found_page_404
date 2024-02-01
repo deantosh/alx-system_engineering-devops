@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Script that configures a new Ubuntu machine to respect above requirements
+
+# Update package manager / install server 
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# redirect to specific end point when error '301 moved permanetly'
+replace_string="server_name _;\n\trewrite ^\/redirect_me http:\/\/cleancodes.tech permanent;"
+sudo sed -i "s/server_name _;/$replace_string/" /etc/nginx/sites-enabled/default
+
+# redirect 'custom 404 page'
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+str_to_replace="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+sudo sed -i "s/listen 80 default_server;/$str_to_replace/" /etc/nginx/sites-enabled/default
+
+
+# Add 'Hello World!' text to index file
+echo "Hello World!" > /var/www/html/index.html
+
+# restart Nginx server
+sudo service nginx start
