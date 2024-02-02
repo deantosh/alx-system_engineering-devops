@@ -6,11 +6,11 @@ sudo apt-get update
 sudo apt-get install -y nginx
 
 # redirect to another page
-replace_string="server_name _;\n\trewrite ^\/redirect_me http:\/\/cleancodes.tech permanent;"
+replace_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/mattfarley.ca permanent;"
 sudo sed -i "s/server_name _;/$replace_string/" /etc/nginx/sites-enabled/default
 
 # Add 'Hello World!' text to index file
-echo "Hello World!" > /var/www/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
 # restart Nginx server
-sudo service nginx start
+sudo service nginx restart
