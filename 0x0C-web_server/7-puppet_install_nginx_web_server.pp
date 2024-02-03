@@ -1,22 +1,22 @@
 # Script to install nginx using puppet
 
 package {'nginx':
-  ensure => 'present',
+  ensure => present,
 }
 
-exec {'install':
+exec {'install_nginx':
   command  => 'sudo apt-get update ; sudo apt-get -y install nginx',
   provider => shell,
 
 }
 
-exec {'Hello':
-  command  => 'echo "Hello World!" | sudo tee /var/www/html/index.html',
+exec {'hello_world':
+  command  => 'echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null',
   provider => shell,
 }
 
-exec {'sudo sed -i "s/listen 80 default_server;/listen 80 default_server;\\n\\tlocation \/redirect_me {
-\\n\\t\\treturn 301 http:\/\/cleancodes.tech\/;\\n\\t}/" /etc/nginx/sites-available/default':
+exec {'update_nginx_config':
+  command  => 'sudo sed -i "s/server_name _;/server_name _;\\n\\trewrite ^\\/redirect_me https:\\/\\/mattfarley.ca permanent;/" /etc/nginx/sites-enabled/default',
   provider => shell,
 }
 
