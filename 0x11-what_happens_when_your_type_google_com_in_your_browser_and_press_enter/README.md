@@ -1,0 +1,1 @@
+This proect focusses on a widely used interview question for many types of software engineering position. It is used to assess a candidate’s general knowledge of how the web stack works on top of the internet. 
