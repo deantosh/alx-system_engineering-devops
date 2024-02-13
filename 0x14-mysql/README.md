@@ -1,0 +1,1 @@
+Project focusses on setting up a Primary-Replica infrastructure using MySQL. Lastly, it aims at creating a MySQL backup for the database.
