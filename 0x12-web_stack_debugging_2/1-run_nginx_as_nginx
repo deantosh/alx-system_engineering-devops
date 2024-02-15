@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Script that runs nginx as the nginx user and listen on all active IPs on port 8080.
+
+# update package lists
+sudo apt-get update
+
+# install latests nginx version
+sudo apt-get install -y nginx
+
+# change user to nginx
+sudo sed -i 's/user www-data/user nginx/g' /etc/nginx/nginx.conf
+
+# listen to port 8080
+sudo sed -i 's/listen\s*80;/listen 8080;/g' /etc/nginx/sites-available/default
+
+# restart nginx server
+sudo service nginx start
