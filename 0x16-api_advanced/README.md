@@ -1,0 +1,1 @@
+API advanced project involves the working knowledge of an existing API -REDDIT. An understanding of this API, is essential to understanding all other API's, from reading its documentation, understanding the methods we can use and using the API.
