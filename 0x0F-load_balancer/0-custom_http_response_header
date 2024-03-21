@@ -1,9 +1,38 @@
 #!/usr/bin/env bash
-# Configure nginx, add custom nginx response header
+11;rgb:0000/0000/0000# Configure nginx, add custom nginx response header
 # The custom header `X-Served-By` will identify the server that is handling the request.
 
+# update the package manager
+sudo apt-get update
+
+# install nginx -- latest version
+sudo apt-get -y install nginx
+
+# listen to port 80
+sudo ufw allow "Nginx HTTP"
+
+# create a folder and add permission -- 755
+sudo mkdir -p /var/www/html
+sudo chmod -R 755 /var/www/html
+
+# create index page
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+# create 404 error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html > /dev/null
+
+# redirect to custom error 404 page
+new_string="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/default
+
+# redirect to single page (/redirect_me)
+new_string="server_name _;\n\trewrite ^\/redirect_me https://\/\/mattfarley.ca permanent;"
+sudo sed -i "s/server_name _;/$new_string/" /etc/nginx/sites-enabled/default
+
+# add custom X-Served-By header
 hostname=$(hostname)
+new_string="server_name _;\n\tadd_header X-Served-By $hostname;" 
+sed -i "s/server_name _;/$new_string/" /etc/nginx/sites-enabled/default
 
-sed -i "s/server_name _;/server_name _;\n\tadd_header X-Served-By $hostname;/" /etc/nginx/sites-enabled/default
-
+# restart web server to update config changes
 sudo service nginx restart
