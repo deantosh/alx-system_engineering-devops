@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-# Configure nginx, add custom nginx response header that will identify the server handling the request.
+# Configure nginx, add custom nginx response header
+# The custom header `X-Served-By` will identify the server that is handling the request.
 
-sed -i "s/server_name _;/server_name _;\n\tadd_header X-Served-By 307515-web-01/" /etc/nginx/sites-enabled/default
+hostname=$(hostname)
 
-sed -i "s/server_name _;/server_name _;\n\tadd_header X-Served-By 307515-web-02;/" /etc/nginx/sites-enabled/default
+sed -i "s/server_name _;/server_name _;\n\tadd_header X-Served-By $hostname;/" /etc/nginx/sites-enabled/default
+
+sudo service nginx restart
