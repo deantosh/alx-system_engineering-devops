@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-11;rgb:0000/0000/0000# Configure nginx, add custom nginx response header
+# Configure nginx, add custom nginx response header
 # The custom header `X-Served-By` will identify the server that is handling the request.
 
 # update the package manager
