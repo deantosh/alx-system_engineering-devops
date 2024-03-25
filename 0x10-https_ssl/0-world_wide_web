@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Script displays information about subdomains
+#	- Accept 2 arguments (domain and subdomain)
+#	- Output: The subdomain [SUB_DOMAIN] is a [RECORD_TYPE] record and points to [DESTINATION].
+#	- When only the parameter domain is provided, display information for its subdomains www, lb-01, web-01 and web-02 - in this specific order.
+#	- When passing domain and subdomain parameters, display information for the specified subdomain.
+#	- Ignore shellcheck case SC2086.
+#	- Must use:
+#		awk
+#		at least one Bash function
+#	- You do not need to handle edge cases such as:
+#		Empty parameters
+#		Nonexistent domain names
+#		Nonexistent subdomains
+
+# arguments passed
+if [ $# -eq 2 ]
+then
+  domain=$1
+  subdomain=$2
+  result=$(dig "$subdomain"."$domain" | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print $4, $5}')
+  record_type=$(echo "$result" | awk '{print $1}')
+  ip=$(echo "$result" | awk '{print $2}')
+  echo "The subdomain $subdomain is a $record_type record and points to $ip"
+else
+  domain=$1
+  subdomain_list=("www" "lb-01" "web-01" "web-02")
+  for subdomain in "${subdomain_list[@]}";
+  do
+    result=$(dig "$subdomain"."$domain" | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print $4, $5}')
+    record_type=$(echo "$result" | awk '{print $1}')
+    ip=$(echo "$result" | awk '{print $2}')
+    echo "The subdomain $subdomain is a $record_type record and points to $ip"
+  done
+fi
