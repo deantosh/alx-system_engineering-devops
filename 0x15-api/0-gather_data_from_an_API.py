@@ -53,4 +53,4 @@ todo_string = "Employee {} is done with tasks({}/{}):".format(
     name, num_c_todos, num_a_todos)
 print(todo_string)
 for todo in completed_todos:
-    print("\t{}".format(todo.get("title")))
+    print("\t {}".format(todo.get("title")))
