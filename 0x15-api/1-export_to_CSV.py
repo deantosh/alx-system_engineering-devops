@@ -39,7 +39,7 @@ for row in data:
 
 fieldnames = (employee_data_list[0].keys())
 with open("USER_ID.csv", "w", newline='') as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
     writer.writeheader()
     for row in employee_data_list:
         writer.writerow(row)
