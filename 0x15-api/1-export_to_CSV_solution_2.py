@@ -40,9 +40,8 @@ if __name__ == "__main__":
     # define fieldname
     fieldnames = ("userId", "username", "completed", "title")
     # create and write to csv file
-    with open("USER_ID.csv", "w", newline="") as csvfile:
+    with open(f"{employee_id}.csv", "w") as csvfile:
         writer = csv.DictWriter(
             csvfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
-        writer.writeheader()
         for row in employee_todo_list:
             writer.writerow(row)
