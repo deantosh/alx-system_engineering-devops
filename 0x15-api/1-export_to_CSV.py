@@ -41,7 +41,7 @@ if __name__ == "__main__":
     fieldnames = ("userId", "username", "completed", "title")
     # create and write to csv file
     with open("USER_ID.csv", "w", newline="") as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
-        writer.writeheader()
+        writer = csv.DictWriter(
+            csvfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
         for row in employee_todo_list:
             writer.writerow(row)
