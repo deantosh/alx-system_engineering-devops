@@ -6,7 +6,6 @@ Requirements:
   - Format must be: "USER_ID","USERNAME","TASK_COMPLETED_STATUS","TASK_TITLE"
   - File name must be: USER_ID.csv
 """
-import csv
 import requests
 import sys
 
@@ -18,30 +17,22 @@ if __name__ == "__main__":
     else:
         sys.exit(1)
 
-    # query API to get data
-    employee_detail = requests.get(
-        f"https://jsonplaceholder.typicode.com/users/{employee_id}")
-    employee_detail = employee_detail.json()
-    username = employee_detail["username"]
-    employee_todos = requests.get(
-        f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos")
-    employee_todos = employee_todos.json()
-    # create the dict to write to the csv file
-    employee_todo_list = []
-    for todo in employee_todos:
-        employee_todo = dict()
-        employee_todo["userId"] = todo["userId"]
-        employee_todo["title"] = todo["title"]
-        employee_todo["completed"] = todo["completed"]
-        employee_todo["username"] = username
-        # append dict to list
-        employee_todo_list.append(employee_todo)
+    # url
+    url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
 
-    # define fieldname
-    fieldnames = ("userId", "username", "completed", "title")
+    # query API to get data
+    employee_data = requests.get(url)
+    employee_todos = requests.get(f"{url}/todos")
+
+    # convert response to json
+    employee_data = employee_data.json()
+    employee_todos = employee_todos.json()
+
+    # get the user name
+    username = employee_data["username"]
+
     # create and write to csv file
-    with open("USER_ID.csv", "w", newline="") as csvfile:
-        writer = csv.DictWriter(
-            csvfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
-        for row in employee_todo_list:
-            writer.writerow(row)
+    with open(f"{employee_id}.csv", "w") as csvfile:
+        for row in employee_todos:
+            csvfile.write('"{}","{}","{}","{}"\n'.format(
+                row["userId"], username, row["completed"], row["title"]))
