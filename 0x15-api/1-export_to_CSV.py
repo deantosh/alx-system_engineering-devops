@@ -11,35 +11,37 @@ import requests
 import sys
 
 
-# validate user input
-if len(sys.argv) == 2:
-    employee_id = sys.argv[1]
-else:
-    print("USAGE: <scriptname> <employee_id>")
-    sys.exit(1)
+if __name__ == "__main__":
+    # validate input
+    if len(sys.argv) == 2:
+        employee_id = sys.argv[1]
+    else:
+        sys.exit(1)
 
-# get data covert to JSON
-user_detail = requests.get(
-    f"https://jsonplaceholder.typicode.com/users/{employee_id}")
-response = requests.get(
-    f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos")
-data = response.json()
+    # query API to get data
+    employee_detail = requests.get(
+        f"https://jsonplaceholder.typicode.com/users/{employee_id}")
+    employee_detail = employee_detail.json()
+    username = employee_detail["username"]
+    employee_todos = requests.get(
+        f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos")
+    employee_todos = employee_todos.json()
+    # create the dict to write to the csv file
+    employee_todo_list = []
+    for todo in employee_todos:
+        employee_todo = dict()
+        employee_todo["userId"] = todo["userId"]
+        employee_todo["title"] = todo["title"]
+        employee_todo["completed"] = todo["completed"]
+        employee_todo["username"] = username
+        # append dict to list
+        employee_todo_list.append(employee_todo)
 
-employee_data_list = []
-user_data = user_detail.json()
-name = user_data.get("username")
-# create employee dict using the given format
-for row in data:
-    employee_data = dict()
-    employee_data["userId"] = row["userId"]
-    employee_data["name"] = name
-    employee_data["completed"] = row["completed"]
-    employee_data["title"] = row["title"]
-    employee_data_list.append(employee_data)
-
-fieldnames = (employee_data_list[0].keys())
-with open("USER_ID.csv", "w", newline='') as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
-    writer.writeheader()
-    for row in employee_data_list:
-        writer.writerow(row)
+    # define fieldname
+    fieldnames = ("userId", "username", "completed", "title")
+    # create and write to csv file
+    with open("USER_ID.csv", "w", newline="") as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
+        writer.writeheader()
+        for row in employee_todo_list:
+            writer.writerow(row)
