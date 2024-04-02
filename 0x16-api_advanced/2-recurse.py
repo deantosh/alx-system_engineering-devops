@@ -1,0 +1,57 @@
+#!/usr/bin/python3
+"""
+Script uses a recursive function to query a Reddit API.
+
+Returns:
+  - list containing the titles of all hot articles for a given subreddit.
+  - None (no results for the given subreddit)
+
+Requirements:
+  - Prototype: def recurse(subreddit, hot_list=[])
+
+Note:
+  - You may change the prototype, but it must be able to be called with
+just a subreddit supplied. AKA you can add a counter, but it must work
+without supplying a starting value in the main.
+  - Invalid subreddits may return a redirect to search results. Ensure
+that you are not following redirects.
+"""
+import requests
+
+
+def recurse(subreddit, hot_list=[]):
+    # input for recursive function 'read_page'
+    params = {'limit': 100}
+
+    # recursive API call
+    post_list = read_page(subreddit, hot_list, params)
+
+    # return list
+    return post_list
+
+
+def read_page(subreddit, hot_list=[], params={}):
+    """read the page after every API call"""
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    headers = {'User-Agent': 'windows:recurse_script:v1.0.0 (by /u/deantosh)'}
+
+    try:
+        res = requests.get(url, params=params, headers=headers)
+        data = res.json()
+        if 'data' in data and 'children' in data["data"]:
+            after = data["data"]["after"]
+            params['after'] = after
+
+            posts = data["data"]["children"]
+            for post in posts:
+                hot_list.append(post["data"]["title"])
+
+            if after is not None:
+                read_page(subreddit, hot_list, params)
+        else:
+            return None
+
+        return hot_list
+
+    except Exception as e:
+        return None
