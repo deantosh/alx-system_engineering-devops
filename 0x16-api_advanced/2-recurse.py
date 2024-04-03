@@ -36,7 +36,7 @@ def read_page(subreddit, hot_list=[], params={}):
     headers = {'User-Agent': 'windows:recurse_script:v1.0.0 (by /u/deantosh)'}
 
     try:
-        res = requests.get(url, params=params, headers=headers)
+        res = requests.get(url, params=params, headers=headers, allow_redirects=False)
         data = res.json()
         if 'data' in data and 'children' in data["data"]:
             after = data["data"]["after"]
@@ -46,11 +46,10 @@ def read_page(subreddit, hot_list=[], params={}):
             for post in posts:
                 hot_list.append(post["data"]["title"])
 
-            if after is not None:
+            if after:
                 read_page(subreddit, hot_list, params)
-        else:
-            return None
 
+        # return title list
         return hot_list
 
     except Exception as e:
