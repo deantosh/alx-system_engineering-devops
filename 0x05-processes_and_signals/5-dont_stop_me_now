@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-# send SIGKILL signal
-
-previous_pid=$(pgrep -f "4-to_infinity_and_beyond" );
-kill -s SIGKILL "$previous_pid";
