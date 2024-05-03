@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Script that sends a kill signal to the "4-to_infinity_and_beyond" process.
+
+pid=$(pgrep "4-to_infinity_and_beyond")
+kill "$pid"
