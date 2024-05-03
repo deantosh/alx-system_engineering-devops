@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Script is used to get information regarding the "bash" process. Cannot use pgrep.
+# shellcheck disable=SC2009
+
+ps auxf | grep "bash"
