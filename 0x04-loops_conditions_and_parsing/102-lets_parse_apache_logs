@@ -13,6 +13,6 @@ if [[ -e $filename ]]
 then
     if [[ -s $filename ]]
     then
-        awk '{print $1, $9}' apache-access.logs
+        awk -F' ' '{print $1, $9}' $filename
     fi
 fi
