@@ -7,12 +7,5 @@
 #    -> You are not allowed to use while, for, until and cut
 #    -> Download and commit the apache-access.log file along with your answers files
 
-filename="apache-access.logs"
-
-if [[ -e $filename ]]
-then
-    if [[ -s $filename ]]
-    then
-        awk -F' ' '{print $1, $9}' $filename
-    fi
-fi
+myfile="apache-access.log"
+awk -F' ' '{ print $1, $9}' $myfile
