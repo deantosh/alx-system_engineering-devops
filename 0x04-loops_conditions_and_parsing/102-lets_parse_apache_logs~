@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Script displays the visitor IP along wit the HTTP status code from the Apache log file.
+# Requirements:
+#    -> Format: IP HTTP_CODE
+#        - in a list format
+#    -> You must use awk
+#    -> You are not allowed to use while, for, until and cut
+#    -> Download and commit the apache-access.log file along with your answers files
+
+filename="apache-access.logs"
+
+if [[ -e $filename ]]
+then
+    if [[ -s $filename ]]
+    then
+        awk -F' ' '{print $1, $9}' $filename
+    fi
+fi

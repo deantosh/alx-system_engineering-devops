@@ -22,7 +22,7 @@ def top_ten(subreddit):
         res_dict = res.json()
         if 'data' in res_dict and 'children' in res_dict['data']:
             posts_data = res_dict["data"]["children"]
-            for post in posts_data[:10]:
+            for post in posts_data[1:]:
                 title = post["data"]["title"]
                 print(title)
         else:

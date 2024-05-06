@@ -27,7 +27,10 @@ def recurse(subreddit, hot_list=[]):
     post_list = read_page(subreddit, hot_list, params)
 
     # return list
-    return post_list
+    if post_list:
+        return post_list
+    else:
+        return None
 
 
 def read_page(subreddit, hot_list, params):
