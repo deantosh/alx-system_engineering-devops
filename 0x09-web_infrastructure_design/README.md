@@ -5,6 +5,6 @@ Project focuses on the conceptual theory regarding the underlying technology and
 For each design, an image containing all the components of the web infrastrucure must be designed on a whiteboard. This image would be followed by some specifics about the infrastructure. Lastly the issues associated with the design must also be explained.
 
 This issues might include but is not limited to:
-  i. SPOF (Single Point Of Failure)
-  ii. Security Issues (no firewalls and https)
-  iii. Monitoring
+i. SPOF (Single Point Of Failure)
+ii. Security Issues (no firewalls and https)
+iii. Monitoring
