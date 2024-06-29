@@ -6,6 +6,6 @@ package { 'Flask':
 }
 
 package { 'Werkzeug':
-  ensure   => '2.0.2',
+  ensure   => '2.1.1',
   provider => 'pip3',
 }

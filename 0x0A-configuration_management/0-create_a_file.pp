@@ -1,4 +1,4 @@
-# Creates `/tmp/school`
+# Creates `/tmp/school` - using file resource type
 file { '/tmp/school':
     ensure  => present,
     mode    => '0744',
