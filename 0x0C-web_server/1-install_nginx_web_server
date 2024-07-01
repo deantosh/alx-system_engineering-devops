@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installs nginx server and configure it based on the requirements provided
+# Installs nginx server and configures it.
 apt-get update
 apt-get -y install nginx
 ufw allow 'Nginx HTTP'
