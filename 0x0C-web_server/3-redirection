@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Script that configures a new Ubuntu machine to respect above requirements
+# Script that configures a new Ubuntu machine to redirect requests
 
 # Update package manager / install server 
 sudo apt-get update
