@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# fix docker apache2 container.
-# returns error `curl: (52) Empty reply from server` when querying the root of it.
+# fix docker apache2 container
 
 sudo service apache2 start
