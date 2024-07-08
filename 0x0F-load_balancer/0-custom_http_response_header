@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
-# Configure nginx, add custom nginx response header
+# Configure nginx.
+# Requirements:
+#   - listen to port 80
+#   - change mode of the foler with the html pages (755)
+#   - create index and error 404 page
+#   - redirect if -- /redirect_me is hit
+#   - add custom nginx response header
 # The custom header `X-Served-By` will identify the server that is handling the request.
+
+# Disable for entire script
+# shellcheck disable=SC2154
 
 # update the package manager
 sudo apt-get update
