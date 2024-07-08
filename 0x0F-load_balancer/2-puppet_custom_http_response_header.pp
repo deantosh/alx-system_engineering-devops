@@ -1,5 +1,5 @@
-# Puppet installs nginx server.
-# Configures it based on the requirements:
+# Puppet installs and configure nginx server.
+# Requirements:
 #	- add custom header X-Served-By set to 'hostname'
 
 # update apt-get
