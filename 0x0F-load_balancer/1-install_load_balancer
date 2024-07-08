@@ -19,17 +19,14 @@ frontend dean_frontend
 	bind *:80
 	mode http
 	timeout client 30s
-	timeout connect 5s
-	timeout server 30s
 	default_backend dean_backend
 backend dean_backend
 	balance roundrobin
 	mode http
-	timeout client 30s
 	timeout connect 5s
 	timeout server 30s
-	server 307515-web-01 3.94.213.78:80 check
-	server 307515-web-02 34.204.61.229:80 check
+	server 307515-web-01 52.4.1.217:80 check
+	server 307515-web-02 35.174.213.249:80 check
 
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
