@@ -1,13 +1,14 @@
 # Project Overview
 
-HTTP is not a secure communication protocol since if a person is able to tap into the communication
-challenge. All the data being sent between the client and the server is easily understood. This brings about
-a security threat, especially when sensitive information i.e bank details is being transferred.
+HTTP is not a secure communication protocol. If a person is able to tap into the communication
+channel, all the data being sent between the client and the server is easily read.
 
-This leaves us with no choice than to try and secure the communication end points by encrypting/decrypting the
-data being shared between the client and the server.
+This challenge brings about a security threat, especially when sensitive information i.e bank details
+is being transferred.
 
-HTTP SSL is employed to achieve the above mentioned issue.
+To deal with this challenge a more secure communication protocol is used between the end points.
+This secure protocol is HTTP SSL. The secure protocol encrypts/decrypts the data being shared between
+the client and the server.
 
 HTTPS SSL advantages:
 1. Creating a more secure client-server connection.
