@@ -12,6 +12,7 @@
 #		Empty parameters
 #		Nonexistent domain names
 #		Nonexistent subdomains
+# shellcheck disable=SC2086
 
 # arguments passed
 if [ $# -eq 2 ]
