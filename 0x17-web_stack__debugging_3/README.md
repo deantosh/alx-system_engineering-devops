@@ -1,4 +1,4 @@
-0x17.Web stack debugging #3
+# Project Overview
 
 When debugging, sometimes logs are not enough. Either because the software is breaking in a way that was not expected and the error is not being logged, or because logs are not providing enough information. In this case, you will need to go down the stack, the good news is that this is something Holberton students can do :)
 
@@ -9,7 +9,7 @@ The web stack you are debugging today is a Wordpress website running on a LAMP s
 
 This project is part of a series of web stack debugging tasks. Strace diagonistic tool is used to test and debug the problem facing the stack in this task.
 
-General
+## General
  - All your files will be interpreted on Ubuntu 14.04 LTS
  - All your files should end with a new line
  - A README.md file at the root of the folder of the project is mandatory
