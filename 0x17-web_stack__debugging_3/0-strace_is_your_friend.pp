@@ -1,3 +1,4 @@
+# Manifest fixes apache2 internal server error:500
 file_line { 'fix_class_wp_locale_extension':
   path  => '/var/www/html/wp-settings.php',
   line  => 'require_once( ABSPATH . WPINC . \'/class-wp-locale.php\' );',
